@@ -43,6 +43,20 @@ app.get('/api/about/neighborhood/:listingId', (req, res) => {
     }
   });
 });
+// New post method
+app.post('/api/about/hosts/:id', (req, res) => {
+  const {
+    first, last, city, state, country, joined, desc, email, photoUrl,
+  } = req.body;
+  const theQuery = `INSERT INTO hosts (first_name, last_name, city, state, country, joined_in_date, description, email, photo_url) VALUES (${first}, ${last}, ${city}, ${state}, ${country}, ${joined}, ${desc}, ${email}, ${photoUrl})`;
+  db.query(theQuery, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('inserted hosts data');
+    }
+  });
+});
 
 app.listen(3001, () => {
   console.log('Server started on 3001');
