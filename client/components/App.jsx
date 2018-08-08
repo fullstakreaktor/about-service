@@ -14,7 +14,7 @@ class App extends React.Component {
 
     this.state = {
       id: +props.id,
-      listingId: +props.listingId,
+      listingId: +props.listingId+3,
       host: {},
       joinMonth: '',
       joinYear: '',
@@ -28,6 +28,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    //still need to fill in CRUD APIs
     this.getHostInfo();
     this.getReviewInfo();
     this.reviewOrReviews();
@@ -36,28 +37,58 @@ class App extends React.Component {
 
   getHostInfo() {
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    
+    const locSplit = window.location.pathname.split('/');
+    let idParam = null;
+    for(var i = 0; i < locSplit.length; i++){
+      if(locSplit[i] === 'pawstel'){
+        idParam = parseInt(locSplit[i+1])
+      }
+    }
 
-    $.get(`/api/about/hosts/${this.state.id}`, (data) => {
-      this.setState({ host: JSON.parse(data)[0] });
-      this.setState({ joinMonth: monthNames[Number(this.state.host.joined_in_date.split('-')[1]) - 1] });
-      this.setState({ joinYear: this.state.host.joined_in_date.split('-')[0] });
-    });
+    if(typeof idParam === 'number' && idParam > 0 &&  idParam < 10000001){
+      $.get(`/api/about/hosts/${idParam}`, (data) => {
+        this.setState({ host: JSON.parse(data)[0] });
+        this.setState({ joinMonth: monthNames[Number(this.state.host.joined_in_date.split('-')[1]) - 1] });
+        this.setState({ joinYear: this.state.host.joined_in_date.split('-')[0] });
+      });
+    }
+    
   }
 
   getReviewInfo() {
-    $.get(`/api/about/reviews/${this.state.id}`, (data) => {
-      this.setState({ numsOfReviews: data });
-    });
+    const locSplit = window.location.pathname.split('/');
+    let idParam = null;
+    for(var i = 0; i < locSplit.length; i++){
+      if(locSplit[i] === 'pawstel'){
+        idParam = parseInt(locSplit[i+1])
+      }
+    }
+
+    if(typeof idParam === 'number' && idParam > 0 &&  idParam < 10000001){
+      $.get(`/api/about/reviews/${idParam}`, (data) => {
+        this.setState({ numsOfReviews: data });
+      });
+    }
   }
 
   getNeighborhoodInfo() {
-    $.get(`/api/about/neighborhood/${this.state.listingId}`, (data) => {
-      let neighborhoodInfo = JSON.parse(data);
-      let lon_location = neighborhoodInfo[0].lon_location;
-      let lat_location = neighborhoodInfo[0].lat_location;
-      // let location = {lon_location, lat_location};
-      this.setState({ neighborhoodInfo: neighborhoodInfo[0] });
-    });
+    const locSplit = window.location.pathname.split('/');
+    let idParam = null;
+    for(var i = 0; i < locSplit.length; i++){
+      if(locSplit[i] === 'pawstel'){
+        idParam = parseInt(locSplit[i+1])
+      }
+    }
+    if(typeof idParam === 'number' && idParam > 0 &&  idParam < 10000001){
+      $.get(`/api/about/neighborhood/${idParam}`, (data) => {
+        let neighborhoodInfo = JSON.parse(data);
+        let lon_location = neighborhoodInfo[0].lon_location;
+        let lat_location = neighborhoodInfo[0].lat_location;
+        // let location = {lon_location, lat_location};
+        this.setState({ neighborhoodInfo: neighborhoodInfo[0] });
+      });
+    }
   }
 
   reviewOrReviews() {
@@ -81,6 +112,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {this.state.id}
         <span styleName='title'>Hosted By {this.state.host.first_name}</span>
         <span><img styleName='hostImg' src={`https://s3-us-west-1.amazonaws.com/dog-photos-bentley/${this.state.host.id}.jpeg`}/></span>
         <HostInfo host={this.state.host} joinMonth={this.state.joinMonth} joinYear={this.state.joinYear} reviews={this.state.numsOfReviews} reviewWording={this.state.reviewWording} verifiedOrNot={this.verifiedOrNot}/>

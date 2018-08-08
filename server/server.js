@@ -11,10 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.use('/pawstel/:id', express.static(path.join(__dirname, '../public')));
+
 app.get('/api/about/hosts/:id', (req, res) => {
   // console.log(req.params);
   db.selectHostInfo(+req.params.id, (err, result) => {
-   console.log('heeeeeelo', arguments);
+   //console.log('heeeeeelo', arguments);
     if (err) {
       console.log(err);
     } else {
@@ -24,7 +26,7 @@ app.get('/api/about/hosts/:id', (req, res) => {
 });
 
 app.get('/api/about/reviews/:listingId', (req, res) => {
-  console.log(req.params);
+  //console.log(req.params);
   db.reviewsForHost(+req.params.listingId, (err, result) => {
     if (err) {
       console.log(err);
