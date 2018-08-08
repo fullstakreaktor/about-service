@@ -28,7 +28,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    //still need to fill in CRUD APIs
     this.getHostInfo();
     this.getReviewInfo();
     this.reviewOrReviews();
