@@ -30,22 +30,19 @@ const neighborhoodInfo = (id, callback) => {
     } else {
       callback(null, result);
     }
-  })
-}
-
-module.exports = {
-  selectHostInfo, reviewsForHost, neighborhoodInfo,
+  });
 };
 
-// selectHostInfo();
-// reviewsForHost((err, result) => {
-//   console.log(result.length);
-// });
+const updateAvgReview = (id, newReview) => {
+  // Do later.
+};
 
-// neighborhoodInfo(56, (err, result)=> {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(result);
-//   }
-// });
+const postHost = (first, last, city, st, cnt, join, dsc, mail, url, callback) => {
+  const queryStr = 'INSERT INTO hosts (first_name, last_name, city, state, country, joined_in_date, description, email, photo_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  const params = [first, last, city, st, cnt, join, dsc, mail, url];
+  connection.query(queryStr, params, callback);
+};
+
+module.exports = {
+  selectHostInfo, reviewsForHost, neighborhoodInfo, postHost, updateAvgReview,
+};

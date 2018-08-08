@@ -3,21 +3,20 @@ const mockData = require('./mockdata.js');
 
 
 const connection = mysql.createConnection({
-  host: 'database',
+  host: 'localhost',
   user: 'root',
-  password: 'dog',
+  // password: 'dog',
   database: 'rental_hosts',
-  port: '3306',
 });
 
-setTimeout(function() {
-connection.connect((err) => {
-  if (err) {
-    console.log('Error connecting to mysql');
-  } else {
-    console.log('connected to my sql');
-  }
-});
+setTimeout(() =>{
+  connection.connect((err) => {
+    if (err) {
+      console.log('Error connecting to mysql');
+    } else {
+      console.log('connected to my sql');
+    }
+  });
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max))
