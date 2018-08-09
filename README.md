@@ -13,22 +13,30 @@
 
 ## CRUD
 
-CREATE
+##### CREATE
+```
   post('/listings', () {
     db.makeListing();
-    })
-READ
+    });
+```
+##### READ
+```
   get('/listings/:id', () {
     db.getListings();
-    })
-UPDATE
+    });
+```
+##### UPDATE
+```
   put('listings/:id/update', () {
     db.updateListing();
-    })
-DELETE
+    });
+```
+##### DELETE
+```
   delete('listings/:id/delete', () {
     db.deleteListing();
-    })
+    });
+```
 
 ## Requirements
 
