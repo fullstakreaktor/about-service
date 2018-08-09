@@ -14,7 +14,7 @@ Navigate to:  http://localhost:3001
 
 ## Crud Methods:
 
-# Get Requests:
+Get Requests:
 Get Host information:
 
 curl -X GET 'http://localhost:3001/api/about/hosts/:id'
