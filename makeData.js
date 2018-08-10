@@ -1,15 +1,14 @@
 'use strict'
 
-var faker = require('faker');
-var axios = require('axios');
+const faker = require('faker');
+const axios = require('axios');
 const fs = require('fs');
 const Path = require('path');
-const fsPromises = require('fs').promises;
-var dataObj = {};
 
-let things = ['run', 'skip', 'play', 'swim in the deep blue sea', 'walk a dog?'];
-let listingNames = ['place', 'fun', 'dogs love our', 'chew toy', 'heaven', 'pups', 'playground', 'animal'];
-let trial1 = ['a', 'b', 'c'];
+
+const things = ['run', 'skip', 'play', 'swim in the deep blue sea', 'walk a dog?'];
+const listingNames = ['place', 'fun', 'dogs love our', 'chew toy', 'heaven', 'pups', 'playground', 'animal'];
+const trial1 = ['a', 'b', 'c'];
 let trialOutput = [];
 const features = ['market', 'hiking', 'shopping mall', 'castro', 'snowboarding', 'dog park', 'historic'];
 
@@ -64,18 +63,18 @@ const boolChooser = function(){
   return false;
 }
 
-const langChooser = function(){
-  let langs = ['French', 'English', 'Spanish', 'Aymara'];
-  let num = Math.floor(Math.random()*4);
+const langChooser = () => {
+  const langs = ['French', 'English', 'Spanish', 'Aymara'];
+  const num = Math.floor(Math.random() * 4);
   return langs[num];
-}
+};
 
 const makeHostData = function(start, end, pathToFile) {
     var stream = fs.createWriteStream(pathToFile);
     let count = start;
     let dataToWrite = [];
     let endWrite = 10000;
-    let str1 = '"id", "first_name", "join_in_date", "email", "verified", "response_rate", "response_time"';
+    let str1 = '"id", "first_name", "last_name", "join_in_date", "email", "verified", "response_rate", "response_time", "languages"';
     dataToWrite.push(str1);
     stream.once('open', (fd) => {
 
@@ -86,9 +85,10 @@ const makeHostData = function(start, end, pathToFile) {
       let idNum = count.toString();
       let date = faker.date.recent(30).toString();
       str += '"' + idNum +'"'+ ',' +'"' + faker.name.firstName()+idNum +'"'+ ',' + '"' +
+      faker.name.lastName() + '"' + ',' + '"' +
       date.slice(0, 15) + '"' + ',' + '"' + faker.internet.email() + '"' + ',' +
       '"' + boolChooser().toString() + '"' + ',' + '"' + Math.ceil(Math.random()*10) + '"' + ',' +
-      '"' + Math.ceil(Math.random()*10).toString() + '"';
+      '"' + Math.ceil(Math.random()*10).toString() + '"' + ',' + '"' + langChooser() + '"';
       dataToWrite.push(str);
       if (count % endWrite === 0) {
         console.log('host count: ', count);
@@ -128,7 +128,7 @@ const makeListingData = function(start, end, pathToFile) {
       let str = '';
       let arrEntry = [];
       let aNum = Math.floor(Math.random()*6).toString();
-      str += '"'+count.toString() +' " '+ ',' + '"'+faker.company.companyName()+count.toString()+'"' + ',' +
+      str += '"'+count.toString() +' " '+ ',' + '"'+'Listing ' + count.toString() +'"' + ',' +
         '"'+faker.address.latitude()+'"' + ',' + '"'+faker.address.longitude() + ',' +
         '"' + faker.address.city()+'"' + ',' + '"'+faker.address.state() +'"'+ ',' +
         '"'+faker.address.country() +'"'+ ',' +

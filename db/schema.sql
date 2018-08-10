@@ -1,13 +1,13 @@
 DROP DATABASE IF EXISTS rental_hosts;
 CREATE DATABASE rental_hosts;
 
-use rental_hosts;
+\c rental_hosts;
 
 CREATE TABLE hosts (
-  id int NOT NULL AUTO_INCREMENT,
+  id int NOT NULL,
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
-  joined_in_date DATE NOT NULL,
+  join_in_date DATE NOT NULL,
   references_count int DEFAULT 0,
   verified boolean DEFAULT false,
   response_rate FLOAT,
@@ -18,7 +18,8 @@ CREATE TABLE hosts (
 );
 
 CREATE TABLE listings (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL,
+  user_id INT NOT NULL,
   features varchar(500),
   city varchar(255)  NOT NULL,
   state varchar(255)  NOT NULL,
@@ -29,6 +30,7 @@ CREATE TABLE listings (
   lon_location float,
   host_guidebook varchar(255),
   photo_url varchar(255) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES hosts(id),
   PRIMARY KEY (id)
 );
 
@@ -62,7 +64,7 @@ CREATE TABLE listings (
 -- );
 
 CREATE TABLE reviews (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL,
   user_id INT NOT NULL,
   list_id INT NOT NULL,
   rating INT NOT NULL,
