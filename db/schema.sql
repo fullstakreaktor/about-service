@@ -7,30 +7,59 @@ CREATE TABLE hosts (
   id int NOT NULL AUTO_INCREMENT,
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
-  city varchar(255)  NOT NULL,
-  state varchar(255)  NOT NULL,
-  country varchar(255)  NOT NULL,
   joined_in_date DATE NOT NULL,
   references_count int DEFAULT 0,
   verified boolean DEFAULT false,
-  description varchar(1000) NOT NULL,
   response_rate FLOAT,
   response_time int,
   languages varchar(255),
   email varchar(255) NOT NULL,
-  photo_url varchar(255) NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE listings (
   id INT NOT NULL AUTO_INCREMENT,
   features varchar(500),
+  city varchar(255)  NOT NULL,
+  state varchar(255)  NOT NULL,
+  country varchar(255)  NOT NULL,
   things_to_do varchar(500),
+  description varchar(1000) NOT NULL,
   lat_location float,
   lon_location float,
   host_guidebook varchar(255),
+  photo_url varchar(255) NOT NULL,
   PRIMARY KEY (id)
 );
+
+-- CREATE TABLE hosts (
+--   id int NOT NULL AUTO_INCREMENT,
+--   first_name varchar(255) NOT NULL,
+--   last_name varchar(255) NOT NULL,
+--   city varchar(255)  NOT NULL,
+--   state varchar(255)  NOT NULL,
+--   country varchar(255)  NOT NULL,
+--   joined_in_date DATE NOT NULL,
+--   references_count int DEFAULT 0,
+--   verified boolean DEFAULT false,
+--   description varchar(1000) NOT NULL,
+--   response_rate FLOAT,
+--   response_time int,
+--   languages varchar(255),
+--   email varchar(255) NOT NULL,
+--   photo_url varchar(255) NOT NULL,
+--   PRIMARY KEY (id)
+-- );
+
+-- CREATE TABLE listings (
+--   id INT NOT NULL AUTO_INCREMENT,
+--   features varchar(500),
+--   things_to_do varchar(500),
+--   lat_location float,
+--   lon_location float,
+--   host_guidebook varchar(255),
+--   PRIMARY KEY (id)
+-- );
 
 CREATE TABLE reviews (
   id INT NOT NULL AUTO_INCREMENT,

@@ -52,7 +52,7 @@ app.get('/api/about/neighborhood/:listingId', (req, res) => {
   });
 });
 // New post method
-app.put('/api/about/hosts/:userId', (req, res) => {
+app.put('/api/about/hosts/:userId/:rating', (req, res) => {
   // Update method takes in a user's id and new rating and
   // passes those along to the database functions.
   const newRating = req.body.rating;
