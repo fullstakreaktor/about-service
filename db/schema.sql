@@ -1,4 +1,4 @@
-vDROP DATABASE IF EXISTS rental_hosts;
+DROP DATABASE IF EXISTS rental_hosts;
 CREATE DATABASE rental_hosts;
 
 use rental_hosts;
