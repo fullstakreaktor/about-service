@@ -45,9 +45,6 @@ CREATE TABLE ratings (
 );
 
 
-
-
-
 copy hosts (list_name, first_name, last_name, city, 
 	state, country, joined_in_date, references_count, verified, 
 	description, response_rate, response_time, languages, email) 
@@ -66,7 +63,7 @@ from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/host/th
 copy hosts (list_name, first_name, last_name, city, 
 	state, country, joined_in_date, references_count, verified, 
 	description, response_rate, response_time, languages, email) 
-from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/host/fourthFourthOfHostTable.csv' DELIMITERS ',' CSV;
+from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/host/fourFourthOfHostTable.csv' DELIMITERS ',' CSV;
 
 copy listing (features, things_to_do, lat_location, lon_location) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/listings/first_listingsTableData.csv' DELIMITERS ',' CSV;
 copy listing (features, things_to_do, lat_location, lon_location) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/listings/second_listingsTableData.csv' DELIMITERS ',' CSV;
