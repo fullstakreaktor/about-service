@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS rental_hosts;
 CREATE DATABASE rental_hosts;
 
-\c rental_hosts;
+ \c rental_hosts;
 
 CREATE TABLE hosts (
   id int NOT NULL,
@@ -19,8 +19,8 @@ CREATE TABLE hosts (
 
 CREATE TABLE listings (
   id INT NOT NULL,
-  user_id INT NOT NULL,
-  features varchar(500),
+  listing_name varchar(200) NOT NULL,
+  host_id INT NOT NULL,
   city varchar(255)  NOT NULL,
   state varchar(255)  NOT NULL,
   country varchar(255)  NOT NULL,
@@ -28,9 +28,9 @@ CREATE TABLE listings (
   description varchar(1000) NOT NULL,
   lat_location float,
   lon_location float,
-  host_guidebook varchar(255),
+  rating INT,
   photo_url varchar(255) NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES hosts(id),
+  FOREIGN KEY (host_id) REFERENCES hosts(id),
   PRIMARY KEY (id)
 );
 

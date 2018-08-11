@@ -69,26 +69,23 @@ const langChooser = () => {
   return langs[num];
 };
 
-const makeHostData = function(start, end, pathToFile) {
-    var stream = fs.createWriteStream(pathToFile);
-    let count = start;
-    let dataToWrite = [];
-    let endWrite = 10000;
-    let str1 = '"id", "first_name", "last_name", "join_in_date", "email", "verified", "response_rate", "response_time", "languages"';
-    dataToWrite.push(str1);
-    stream.once('open', (fd) => {
-
+const makeHostData = (start, end, pathToFile) => {
+  var stream = fs.createWriteStream(pathToFile);
+  let count = start;
+  let dataToWrite = [];
+  let endWrite = 10000;
+  let str1 = '"id", "first_name", "last_name", "join_in_date", "email", "verified", "response_rate", "response_time", "languages"';
+  dataToWrite.push(str1);
+  stream.once('open', (fd) => {
     while (count <= end) {
-      let entry = {};
       let str = '';
-      let arrEntry = [];
-      let idNum = count.toString();
-      let date = faker.date.recent(30).toString();
-      str += '"' + idNum +'"'+ ',' +'"' + faker.name.firstName()+idNum +'"'+ ',' + '"' +
+      const idNum = count.toString();
+      const date = faker.date.recent(30).toString();
+      str += '"' + idNum +'"'+ ',' +'"' + faker.name.firstName() + idNum + '"' + ',' + '"' +
       faker.name.lastName() + '"' + ',' + '"' +
       date.slice(0, 15) + '"' + ',' + '"' + faker.internet.email() + '"' + ',' +
-      '"' + boolChooser().toString() + '"' + ',' + '"' + Math.ceil(Math.random()*10) + '"' + ',' +
-      '"' + Math.ceil(Math.random()*10).toString() + '"' + ',' + '"' + langChooser() + '"';
+      '"' + boolChooser().toString() + '"' + ',' + '"' + Math.ceil(Math.random() * 10) + '"' + ',' +
+      '"' + Math.ceil(Math.random() * 10).toString() + '"' + ',' + '"' + langChooser() + '"';
       dataToWrite.push(str);
       if (count % endWrite === 0) {
         console.log('host count: ', count);
@@ -113,80 +110,75 @@ const makeHostData = function(start, end, pathToFile) {
 const thingsToDoChooser = function(){
   return things[Math.floor(Math.random()*5)];
 }
-const makeListingData = function(start, end, pathToFile) {
-    // Data generation plan:
-    var stream = fs.createWriteStream(pathToFile);
-    let count = start;
-    let dataToWrite = [];
-    let endWrite = 10000;
-    let str1 = '"id", "listing_name", "lat_location", "lon_location", "city", "state", "country", "description", "photo_url", "rating", "host_id", "things_to_do"';
-    dataToWrite.push(str1);
-    stream.once('open', (fd) => {
+const makeListingData = (start, end, pathToFile) => {
+  // Data generation plan:
+  var stream = fs.createWriteStream(pathToFile);
+  let count = start;
+  let dataToWrite = [];
+  let endWrite = 10000;
+  let str1 = '"id", "listing_name", "lat_location", "lon_location", "city", "state", "country", "description", "photo_url", "rating", "host_id", "things_to_do"';
+  dataToWrite.push(str1);
+  stream.once('open', (fd) => {
 
     while (count <= end) {
       let entry = {};
       let str = '';
       let arrEntry = [];
-      let aNum = Math.floor(Math.random()*6).toString();
-      str += '"'+count.toString() +' " '+ ',' + '"'+'Listing ' + count.toString() +'"' + ',' +
-        '"'+faker.address.latitude()+'"' + ',' + '"'+faker.address.longitude() + ',' +
-        '"' + faker.address.city()+'"' + ',' + '"'+faker.address.state() +'"'+ ',' +
-        '"'+faker.address.country() +'"'+ ',' +
-        '"'+faker.lorem.sentences() +'"'+ ',' + 
-        '"'+imgUrlGenerator()+'"' + ',' + '"'+ aNum +'"'+ ','+
+      let aNum = Math.floor(Math.random() * 6).toString();
+      str += '"' + count.toString() + ' " ' + ',' + '"' +'Listing ' + count.toString() + '"' + ','
+        + '"'+faker.address.latitude() + '"' + ',' + '"' + faker.address.longitude() + '"' + ',' +
+        '"' + faker.address.city() + '"' + ',' + '"' + faker.address.state() + '"' + ',' +
+        '"'+faker.address.country() + '"' + ',' +
+        '"'+faker.lorem.sentences() + '"' + ',' + 
+        '"'+imgUrlGenerator() + '"' + ',' + '"' + aNum + '"' + ',' + 
         '"'+Math.ceil(Math.random()*10000000) + '"' + ',' + '"' + thingsToDoChooser() + '"';
       dataToWrite.push(str);
 
       if (count % endWrite === 0) {
         console.log('listing count: ', count);
-        for (let idx = 0; idx < dataToWrite.length; idx++) {
-        stream.write(dataToWrite[idx] + '\n');
+        for (let idx = 0; idx < dataToWrite.length; idx+=1) {
+          stream.write(dataToWrite[idx] + '\n');
         }
         dataToWrite = [];
       }
-      count++;
+      count += 1;
     }
-    stream.end();})
-    console.log('done?');
-}
+    stream.end();
+  });
+};
 // makeListingData(1, 3000000, '/Users/henrygreen/Documents/datastorage/listing1.csv');
 // makeListingData(3000001, 6000000, '/Users/henrygreen/Documents/datastorage/listing2.csv');
 // makeListingData(6000001, 8000000, '/Users/henrygreen/Documents/datastorage/listing3.csv');
 // makeListingData(8000001, 10000000, '/Users/henrygreen/Documents/datastorage/listing4.csv');
 
-const makeReviewData = function(start, end, pathToFile) {
-    // Data generation plan:
-    var stream = fs.createWriteStream(pathToFile);
-    let count = start;
-    let dataToWrite = [];
-    let endWrite = 50000;
-    let str1 = '"id", "user_id", "list_id", "rating"';
-    dataToWrite.push(str1);
-    stream.once('open', (fd) => {
-
+const makeReviewData = (start, end, pathToFile) => {
+  // Data generation plan:
+  const stream = fs.createWriteStream(pathToFile);
+  let count = start;
+  let dataToWrite = [];
+  const endWrite = 50000;
+  const str1 = '"id", "user_id", "list_id", "rating"';
+  dataToWrite.push(str1);
+  stream.once('open', (fd) => {
     while (count <= end) {
-      let entry = {};
       let str = '';
-      let arrEntry = [];
-      str += '"'+count.toString() +'"'+ ',' + '"' + Math.ceil(Math.random()*10000000) + '"' + ',' +
-      '"' + Math.ceil(Math.random()*10000000) + '"' + ',' + '"' + Math.floor(Math.random()*5) + '"';
+      str += '"' + count.toString() + '"' + ',' + '"' + Math.ceil(Math.random() * 10000000) + '"' + ',' +
+      '"' + Math.ceil(Math.random()*10000000) + '"' + ',' + '"' + Math.floor(Math.random() * 5) + '"';
       dataToWrite.push(str);
 
       if (count % endWrite === 0) {
         console.log('review count: ', count);
-        for (let idx = 0; idx < dataToWrite.length; idx++) {
-        stream.write(dataToWrite[idx] + '\n');
+        for (let idx = 0; idx < dataToWrite.length; idx+=1) {
+          stream.write(dataToWrite[idx] + '\n');
         }
         dataToWrite = [];
       }
-      count++;
+      count += 1;
     }
-    stream.end();})
-    console.log('done?');
-}
+    stream.end();
+  });
+};
 // makeReviewData(1, 3000000, '/Users/henrygreen/Documents/datastorage/review1.csv');
 // makeReviewData(3000001, 6000000, '/Users/henrygreen/Documents/datastorage/review2.csv');
-// makeReviewData(6000000, 8000000, '/Users/henrygreen/Documents/datastorage/review3.csv');
+// makeReviewData(6000001, 8000000, '/Users/henrygreen/Documents/datastorage/review3.csv');
 // makeReviewData(8000001, 10000000, '/Users/henrygreen/Documents/datastorage/review4.csv');
-
-
