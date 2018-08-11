@@ -1,12 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-// need to create a file to select data
 const db = require('../db/queries.js');
 
 const app = express();
 
-// to parse our data and use req.body
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -15,14 +13,12 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/api/about/hosts/:id', (req, res) => {
   console.log(req.params);
   db.selectHostInfo(+req.params.id, (err, result) => {
-    //console.log('heeeeeelo', arguments);
     if (err) {
       console.log(err);
     } else {
