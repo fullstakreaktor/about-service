@@ -4,7 +4,7 @@ import styles from './css/hostInfo.css';
 
 
 const HostDescription = (props) => {
-  return(
+  return (
     <div styleName="infoBox">
       <p>{props.host.description}</p>
       <p>Languages: <span styleName='boldingWords'>{props.host.languages}</span></p>

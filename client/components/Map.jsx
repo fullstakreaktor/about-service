@@ -14,7 +14,7 @@ return(
   />
 </div>
 
-  )
+  );
 };
 
 export default CSSModules(GoogleMap, styles);

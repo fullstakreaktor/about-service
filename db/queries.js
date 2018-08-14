@@ -1,8 +1,9 @@
 const pool = require('./connect_postgres.js');
-
+const db = require('./connection.js');
 const selectHostInfo = (id, callback) => {
   const theQuery = `select * from hosts where id = ${id}`;
-  pool.query(theQuery, (err, result) => {
+  db.query(theQuery, (err, result) => {
+  //pool.query(theQuery, (err, result) => {
     if (err) {
       callback(err);
     } else {
@@ -12,8 +13,9 @@ const selectHostInfo = (id, callback) => {
 };
 
 const reviewsForHost = (id, callback) => {
-  const theQuery = `select * from reviews where user_id = ${id}`;
-  pool.query(theQuery, (err, result) => {
+  const theQuery = `select rating from reviews where user_id = ${id}`;
+  db.query(theQuery, (err, result) => {
+  //pool.query(theQuery, (err, result) => {
     if (err) {
       callback(err);
     } else {
@@ -24,7 +26,8 @@ const reviewsForHost = (id, callback) => {
 
 const neighborhoodInfo = (id, callback) => {
   const theQuery = `select * from listings where id = ${id}`;
-  pool.query(theQuery, (err, result) => {
+  db.query(theQuery, (err, result) => {
+  //pool.query(theQuery, (err, result) => {
     if (err) {
       console.log(err);
     } else {

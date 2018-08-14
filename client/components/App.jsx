@@ -47,7 +47,7 @@ class App extends React.Component {
 
   getReviewInfo() {
     $.get(`/api/about/reviews/${this.state.id}`, (data) => {
-      this.setState({ numsOfReviews: data });
+      this.setState({ numsOfReviews: data.length });
     });
   }
 
@@ -88,7 +88,6 @@ class App extends React.Component {
         <HostDescription host={this.state.host} responseTimeConvertor={this.responseTimeConvertor} />
         <ContactAirbnb />
         {this.state.neighborhoodInfo && <Neighborhood neighborhoodInfo={this.state.neighborhoodInfo} lat={this.state.neighborhoodInfo.lat_location } lng={this.state.neighborhoodInfo.lon_location} zoom='11' /> }
-
       </div>
     );
   }
