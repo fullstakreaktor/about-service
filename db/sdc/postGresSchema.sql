@@ -47,7 +47,7 @@ CREATE TABLE reviews (
   FOREIGN KEY (list_id) REFERENCES listings(id)
 );
 
-Uncomment lines below and run psql < postGresSchama.sql in terminal 
+-- Uncomment lines below and run psql < postGresSchama.sql in terminal 
 
 \copy hosts FROM './csvTables/hostsTable.csv' DELIMITER ',' CSV;
 \copy listings FROM './csvTables/listingsTable.csv' DELIMITER ',' CSV;

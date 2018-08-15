@@ -1,5 +1,5 @@
 import React from 'react';
-import GoogleMap from './Map.jsx';
+// import GoogleMap from './Map.jsx';
 import styles from './css/hostInfo.css';
 import CSSModules from 'react-css-modules';
 
@@ -19,7 +19,7 @@ const Neighborhood = (props) => {
         <span styleName='boldingWords'>Things to do · </span>
         <span>{props.neighborhoodInfo.things_to_do}</span>
       </p>
-      <GoogleMap location={location} zoom='11' />
+      {/* <GoogleMap location={location} zoom='11' /> */}
     </div>
   );
 };
