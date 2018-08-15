@@ -20,6 +20,9 @@ columnspec:
   - name: list_id int
     size: uniform(1..10000000)
 
+# ### To run a separate test, uncomment the lines below and
+# ### comment out the lines above through table.
+
 # table: hosts
 # table_definition: |
 #   CREATE TABLE hosts (
