@@ -5,8 +5,8 @@
   - https://github.com/AirGB/hero-photo-service
   - https://github.com/AirGB/Review-service
   - https://github.com/AirGB/about-service
-  - https://github.com/AirGB/kony-proxy
-
+  - https://github.com/AirGB/reservation_service
+  
 ## API CRUD
 
 ### hosts

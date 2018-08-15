@@ -1,30 +1,48 @@
-const features = ['market', 'hiking', 'shopping mall', 'castro', 'snowboarding', 'dog park', 'historic'];
+const states = [
+  'AK', 'AL', 'AR', 'AS', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'GU', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY'
+];
 
-const thingsToDo = ['Stores, coffee shops, restaurants, and pubs are great here.', 'chinatown is a must go', 'Windy Ocean beach', 'welcome to foggy city'];
+const countries = [
+  'Peru', 'Brazil', 'South Korea', 'Russia', 'Turkmenistan', 'Argentina', 'Argentina', 'Egypt', 'Malaysia', 'Sweden', 'United States', 'Taiwan', 'Singapore', 'Prague', 'Finland', 'Canada', 'China', 'Africa', 'Haiti', 'Mexico', 'Spain', 'Thailand',
+];
+
+const joinInDates = [
+  '2015-02-05', '2018-05-26', '2011-02-16', '2015-02-13', '2016-12-16', '2015-06-26', '2015-02-06', '2013-08-21', '2016-05-18', '2011-10-07',
+];
+
+const plants = [
+  'Cercocarpus montanus Raf. var. glaber (S. Watson) F.L. Martin', 'Phyllostegia renovans W.L. Wagner', 'Astragalus cottonii M.E. Jones', 'Condalia warnockii M.C. Johnst. var. warnockii', 'Ilex cuthbertii Small', 'Pyrola elliptica Nutt.', 'Quercus ×fernaldii Trel.', 'Polystichum Roth', 'Fimbristylis puberula (Michx.) Vahl var. puberula', 'Clinopodium chandleri (Brandegee) Cantino & S.J. Wagstaff', 'Mentzelia multiflora (Nutt.) A. Gray var. longiloba (J. Darl.) Kartesz', 'Linanthus dichotomus Benth.', 'Carex ×stenolepis Less.', 'Aegle Corr. Serr.', 'Rhododendron L.', 'Sapium laurocerasus Desf.', 'Galium serpenticum Dempster ssp. wenatchicum Dempster & Ehrend.', 'Schinus terebinthifolius Raddi', 'Eutrochium maculatum (L.) E.E. Lamont var. foliosum (Fernald) E.E. Lamont', 'Heuchera parvifolia Nutt. ex Torr. & A. Gray var. microcarpa Rosend. Butters & Lakela', 'Hobsonia Massee', 'Triplasis P. Beauv.', 'Bruchia ravenelii Wilson', 'Asplenium kaulfussii Schltdl.', 'Acacia victoriae Benth.', 'Felicia amelloides (L.) Voss', 'Galium boreale L.', 'Symphyotrichum dumosum (L.) G.L. Nesom var. pergracile (Wiegand) G.L. Nesom', 'Lonicera reticulata Raf.', 'Streptanthus fenestratus (Greene) J.T. Howell', 'Helenium vernale Walter', 'Cuscuta potosina Schaffn.', 'Ratibida peduncularis (Torr. & A. Gray) Barnhart var. peduncularis', 'Poa laxiflora Buckley', 'Jubaea Kunth', 'Psorothamnus Rydb.', 'Pittosporum resiniferum Hemsl.', 'Aesculus ×arnoldiana Sarg. [excluded]', 'Grimmia pulvinata (Hedw.) Sm.', 'Camissonia cheiranthifolia (Hornem. ex Spreng.) Raimann', 'Hypnum cupressiforme Hedw. var. cupressiforme', 'Grimmia arizonae Renauld & Cardot', 'Houstonia pusilla Schoepf', 'Chrysanthemum arcticum L.', 'Arctostaphylos ×repens (J.T. Howell) P.V. Wells', 'Berlandiera DC.', 'Lomatium oreganum (J.M. Coult. & Rose) J.M. Coult. & Rose', 'Clarkia tembloriensis Vasek ssp. tembloriensis', 'Pertusaria shenandoensis Hale & Dibben', 'Silene repens Patrin ex Pers. ssp. australis C.L. Hitchc. & Maguire', 'Coreopsis stillmanii (A. Gray) S.F. Blake', 'Solidago uliginosa Nutt. var. levipes (Fernald) Fernald', 'Oenothera neomexicana (Small) Munz', 'Eucalyptus amplifolia Naudin', 'Chamaedorea elegans Mart.', 'Lavatera trimestris L.', 'Rorippa curvisiliqua (Hook.) Besser ex Britton var. lyrata (Nutt.) M. Peck ex C.L. Hitchc.', 'Bruchia hallii Austin', 'Sphaeralcea rusbyi A. Gray ssp. rusbyi', 'Eupatorium leptophyllum DC.', 'Camissonia claviformis (Torr. & Frém.) P.H. Raven ssp. peeblesii (Munz) P.H. Raven', 'Erigeron elatus (Hook.) Greene', 'Arecastrum romanzoffianum (Cham.) Becc.', 'Echinochloa paludigena Wiegand', 'Iva axillaris Pursh', 'Lilium kelloggii Purdy', 'Ruellia metziae Tharp', 'Dichanthelium sabulorum (Lam.) Gould & C.A. Clark var. patulum (Scribn. & Merr.) Gould & C.A. Clark', 'Echinocereus reichenbachii (Terscheck ex Walp.) hort ex Haage ssp. perbellus (Britton & Rose) N.P. Taylor', 'Reimarochloa oligostachya (Munro ex Benth.) Hitchc.', 'Crataegus valida Beadle', 'Romulea rosea (L.) Eckl. var. rosea (L.) Eckl. [excluded]', 'Sarcogyne integra (de Lesd.) H. Magn.', 'Acidanthera Hochst.', 'Brassica oleracea L. var. botrytis L.', 'Abronia nana S. Watson', 'Erigeron pulchellus Michx. var. tolsteadii Cronquist', 'Oenothera xylocarpa Coville', 'Hieracium scabrum Michx. var. intonsum Fernald & H. St. John', 'Iris thompsonii R.C. Foster', 'Collinsia bartsiifolia Benth. var. davidsonii (Parish) Newsom', 'Baptisia ×bicolor Greenm. & Larisey', 'Tradescantia paludosa E.S. Anderson & Woodson', 'Diplazium grandifolium (Sw.) Sw.', 'Psathyrotopsis scaposa (A. Gray) H. Rob.', 'Rhizocarpon cookeanum H. Magn.', 'Tillandsia variabilis Schltdl.', 'Syzygium javanicum Miq.', 'Guibourtia coleosperma (Benth.) J. Léonard', 'Pottia arizonica Wareh.', 'Hibiscadelphus bombycinus Forbes', 'Erigeron cervinus Greene', 'Eutrochium Raf.', 'Croton trinitatis Millsp.', 'Vanilla poitaei Rchb. f.', 'Betula ×caerulea Blanch. var. grandis Blanch. (pro nm.)', 'Tradescantia ×diffusa Bush (pro sp.)', 'Schiedea membranacea H. St. John', 'Primula ×polyantha Mill. (pro sp.)', 'Tiquilia canescens (DC.) A.T. Richardson var. canescens',
+];
+
+const features = [
+  'accelerator', 'accordion', 'account', 'accountant', 'acknowledgment', 'acoustic', 'athlete', 'atm', 'atom', 'attack', 'attempt', 'attention', 'attic', 'attraction', 'august', 'aunt', 'australia', 'australian', 'author', 'authorisation', 'authority', 'authorization', 'avenue', 'babies', 'baboon', 'baby', 'back', 'backbone', 'bacon', 'birthday', 'bit', 'bite', 'chronometer', 'church', 'cicada', 'cinema', 'circle', 'circulation', 'cirrus', 'citizenship', 'city', 'clam', 'clarinet', 'class', 'claus', 'clave', 'clef', 'clerk', 'click', 'client', 'climb', 'clipper', 'cloakroom', 'clock', 'close', 'closet', 'cloth', 'cloud', 'cloudy', 'clover', 'club', 'clutch', 'coach', 'coal', 'coast', 'coat', 'cobweb', 'cockroach', 'cocktail', 'cocoa', 'cod', 'coffee', 'coil', 'coin', 'coke', 'cold', 'collar', 'college', 'collision', 'colombia', 'colon', 'colony', 'color', 'colt', 'column', 'columnist', 'comb', 'comfort', 'comic', 'comma', 'command', 'commission', 'committee', 'community', 'cougar', 'cough', 'country', 'course', 'court', 'cousin', 'cover', 'cow', 'cowbell', 'crab', 'crocodile', 'crocus', 'croissant', 'crook', 'crop', 'cross', 'crow', 'crowd', 'crown', 'crush', 'cry', 'cub', 'cuban', 'cucumber', 'cultivator', 'diving', 'division', 'divorced', 'dock', 'doctor', 'dog', 'dogsled', 'doll', 'dollar', 'dolphin', 'domain', 'donald', 'donkey', 'donna', 'door', 'dorothy', 'double', 'doubt', 'downtown', 'dragon', 'dragonfly', 'drain', 'drake', 'drama', 'draw', 'drawbridge', 'drawer', 'dream', 'dredger', 'fire', 'fired', 'fireman', 'fireplace', 'firewall', 'fish', 'fisherman', 'flag', 'flame', 'flare', 'flat', 'flavor', 'flax', 'flesh', 'flight', 'flock', 'flood', 'floor', 'flower', 'flugelhorn', 'flute', 'fly', 'foam', 'fog', 'fold', 'font', 'food', 'foot', 'football', 'footnote', 'force', 'forecast', 'forehead', 'forest', 'forgery', 'fork', 'form', 'impulse', 'inch', 'income', 'increase', 'index', 'india', 'indonesia', 'industry', 'ink', 'innocent', 'input', 'insect', 'inventory', 'iron', 'island', 'israel', 'italian', 'italy', 'jacket', 'jaguar', 'jail', 'jam', 'james', 'january', 'japan', 'japanese', 'jar', 'jasmine', 'jason', 'jaw', 'jeans', 'jeep', 'jeff', 'jelly', 'jellyfish', 'jennifer', 'jet', 'nephew', 'nerve', 'nest', 'net', 'network', 'news', 'newsprint', 'newsstand', 'nic', 'nickel', 'radar', 'radiator', 'radio', 'radish', 'raft', 'rail', 'railway', 'rain', 'rainbow', 'raincoat', 'rainstorm', 'rake', 'ramie', 'random', 'range', 'rat', 'rate', 'raven', 'ravioli', 'ray', 'rayon', 'reaction', 'representative', 'request', 'resolution', 'respect', 'responsibility', 'rest', 'restaurant', 'result', 'retailer', 'revolve', 'revolver', 'reward', 'rhinoceros', 'rhythm', 'rice', 'richard', 'riddle', 'rifle', 'ring', 'rise', 'risk', 'river', 'riverbed', 'road', 'roadway', 'roast', 'robert', 'robin', 'rock', 'rocket', 'sagittarius', 'sail', 'sailboat', 'sand', 'sandra', 'sandwich', 'santa', 'sarah', 'sardine', 'sudan', 'suede', 'sugar', 'suggestion', 'suit', 'summer', 'sun', 'sunday', 'sundial', 'sunflower', 'sunshine', 'supermarket', 'supply', 'support', 'surfboard', 'surgeon', 'surname', 'surprise', 'susan', 'sushi', 'swallow', 'swamp', 'swan', 'sweater', 'sweatshirt', 'sweatshop', 'swedish', 'sweets', 'swim', 'swimming', 'swing', 'withdrawal', 'witness', 'wolf', 'woman', 'women', 'wood', 'wool', 'woolen', 'word', 'work', 'workshop', 'worm', 'wound', 'wrecker', 'wren', 'wrench', 'wrinkle', 'wrist', 'writer', 'xylophone', 'yacht', 'yak', 'yam', 'yard', 'yarn', 'year', 'yellow', 'yew', 'yogurt', 'yoke', 'yugoslavian', 'zebra', 'zephyr', 'zinc', 'zipper', 'zone', 'zoo', 'zoology'];
+
+const activities = [
+  'snowboarding', 'hiking', 'climbing', 'swimming', 'tanning', 'surfing', 'eating', 'reading', 'tourist spots', 'snorkeling', 'skydiving', 'vr tennis', 'gym', 'netflix and chill', 'shopping', 'pet dogs', 'yodeling', 'karaoke', 'skype', 'caving', 'boxing', 'dancing', 'form a band',
+];
+
+const emails = [
+  'dlippitt0@chicagotribune.com', 'dcharlwood1@icio.us', 'lboichat2@tinyurl.com', 'nbuckle3@gov.uk', 'gtestro4@unblog.fr', 'gwapples5@ameblo.jp', 'jgallichiccio6@howstuffworks.com', 'vvasyushkhin7@squidoo.com', 'ameggison8@xrea.com', 'aglentz9@yolasite.com',
+];
+
+const guideBks = [
+  'https://bit.ly/2vzsxmG', 'https://bit.ly/2vVih7N', 'https://bit.ly/2AZYsSj', 'https://bit.ly/2KKqXTA', 'https://bit.ly/2B6RV8m', 'https://bit.ly/2hs8uxE', 'https://bit.ly/2KLoZ5A', 'https://bit.ly/2P0iwHd', 'https://bit.ly/2vWKdrD',
+];
+
+// for local about-service
 
 const locations = [[-17.8336363, 48.4088007], [32.993182, 110.425983], [50.7480989, 20.2540479]];
-
-const hostGuidebooks = ['https://www.airbnb.com/things-to-do/rooms/2736358', 'https://www.airbnb.com/things-to-do/rooms/1345358', 'https://www.airbnb.com/things-to-do/rooms/1345663'];
 
 const firstNames = ['John', 'Sam', 'Bentley', 'Nova', 'Lily', 'Tofu', 'Snow'];
 
 const lastNames = ['Cho', 'Pham', 'Johnson', 'Smith'];
 
-const cities = ['Ćuprija', 'Bacnotan', 'Henggang', 'Erba', 'Salitrillos', 'Avanca', 'Stuttgart', 'Tišina', 'Caujul', 'Esperança', 'Santa Cruz', 'Växjö', 'Rabak', 'Atlanta', 'Cimrutu', 'Prażmów', 'Mancha Khiri', 'Luohuang', 'Yuanping'];
-
-
-const states = ['New York', 'Missouri', 'California', 'Ohio', 'Alabama', 'Louisiana', 'Alabama', 'Missouri', 'Pennsylvania', 'Texas'];
-
-const countries = ['Peru', 'Brazil', 'South Korea', 'Russia', 'Turkmenistan', 'Argentina', 'Argentina', 'Egypt', 'Malaysia', 'Sweden'];
-
-const joinInDates = ['2015-02-05', '2018-05-26', '2011-02-16', '2015-02-13', '2016-12-16', '2015-06-26', '2015-02-06', '2013-08-21', '2016-05-18', '2011-10-07'];
-
 const descriptions = ['Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.', 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.'];
 
-const emails = ['dlippitt0@chicagotribune.com', 'dcharlwood1@icio.us', 'lboichat2@tinyurl.com', 'nbuckle3@gov.uk', 'gtestro4@unblog.fr', 'gwapples5@ameblo.jp', 'jgallichiccio6@howstuffworks.com', 'vvasyushkhin7@squidoo.com', 'ameggison8@xrea.com', 'aglentz9@yolasite.com'];
+const cities = ['Ćuprija', 'Bacnotan', 'Henggang', 'Erba', 'Salitrillos', 'Avanca', 'Stuttgart', 'Tišina', 'Caujul', 'Esperança', 'Santa Cruz', 'Växjö', 'Rabak', 'Atlanta', 'Cimrutu', 'Prażmów', 'Mancha Khiri', 'Luohuang', 'Yuanping'];
 
 const urls = ['www.photobooth.com/url1'];
 
 module.exports = {
-  features, thingsToDo, locations, hostGuidebooks, firstNames, lastNames, cities, states, countries, joinInDates, descriptions, emails, urls,
+  states, countries, joinInDates, plants, features, activities, emails, guideBks, locations, firstNames, lastNames, descriptions, cities, urls,
 };

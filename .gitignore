@@ -1,2 +1,4 @@
 node_modules
 client/config/googleMap.js
+*csv
+apache-cassandra-3.11.3
