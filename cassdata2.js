@@ -1,5 +1,5 @@
 /*
-  Commented commands are meant to be commented 
+  Commented commands are meant to be commented
   and uncommented in succession to make data.
   The file itself is run several times.
   */
