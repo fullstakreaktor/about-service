@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -17,45 +18,40 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/api/about/hosts/:id', (req, res) => {
-  console.log(req.params);
-  db.selectHostInfo(+req.params.id, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(JSON.stringify(result));
-    }
+  db.selectHostInfo(req.params.id, (result) => {
+    res.send(JSON.stringify(result));
   });
 });
 
 app.get('/api/about/reviews/:listingId', (req, res) => {
-  console.log(req.params);
-  db.reviewsForHost(+req.params.listingId, (err, result) => {
+  db.reviewsForHost(req.params.listingId, (result) => {
+    res.send(JSON.stringify(result));
+  });
+});
+
+app.get('/api/about/neighborhood/:listingId', (req, res) => {
+  db.neighborhoodInfo(req.params.listingId, (err, result) => {
     if (err) {
-      console.log(err);
+      res.sendStatus(401);
     } else {
       res.send(JSON.stringify(result));
     }
   });
 });
 
-app.get('/api/about/neighborhood/:listingId', (req, res) => {
-  db.neighborhoodInfo(+req.params.listingId, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(JSON.stringify(result));
-    }
+app.get('/api/about/listings/:listId', (req, res) => {
+  const id = req.params.listId;
+  db.selectListingInfo(id, (result) => {
+    res.send(JSON.stringify(result));
   });
 });
-// New post method
+
 app.put('/api/about/hosts/:userId/:rating', (req, res) => {
-  // Update method takes in a user's id and new rating and
-  // passes those along to the database functions.
   const newRating = req.body.rating;
   const id = req.params.userId;
   db.updateAvgReview(id, newRating, (err) => {
     if (err) {
-      console.log(err);
+      res.sendStatus(401);
     } else {
       res.sendStatus(201);
     }
@@ -66,7 +62,7 @@ app.delete('/api/about/hosts/:userId', (req, res) => {
   const id = req.params.userId;
   db.deleteUser(id, (err) => {
     if (err) {
-      console.log(err);
+      res.sendStatus(401);
     } else {
       res.sendStatus(201);
     }
@@ -74,7 +70,6 @@ app.delete('/api/about/hosts/:userId', (req, res) => {
 });
 
 app.post('/api/about/hosts/', (req, res) => {
-  // Remember - doesn't matter what the link is, I can route to different database later.
   const first = String(req.body.first_name);
   const last = String(req.body.last_name);
   const city = String(req.body.city);
@@ -87,7 +82,6 @@ app.post('/api/about/hosts/', (req, res) => {
 
   db.postHost(first, last, city, state, country, joined_in_date, desc, email, photoUrl, (err) => {
     if (err) {
-      console.log(err);
       res.send(401);
     } else {
       res.send(201);

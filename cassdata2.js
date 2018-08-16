@@ -1,3 +1,9 @@
+/*
+  Commented commands are meant to be commented 
+  and uncommented in succession to make data.
+  The file itself is run several times.
+  */
+
 'use strict'
 
 const faker = require('faker');
@@ -56,12 +62,12 @@ for (let i = 0; i < 1000; i++) {
   }, i + 1)
 };
 */
-const boolChooser = function(){
-  if (Math.random() > 0.6){
+const boolChooser = () => {
+  if (Math.random() > 0.6) {
     return true;
   }
   return false;
-}
+};
 
 const langChooser = () => {
   const langs = ['French', 'English', 'Spanish', 'Aymara'];
@@ -159,7 +165,8 @@ const makeListingData = (start, end, pathToFile) => {
 // ----makeListingData(8000001, 10000000, '/Users/henrygreen/Documents/datastorage/listing4.csv');
 
 const makeReviewData = (start, end, pathToFile) => {
-  // Data generation plan:
+  // Generates data and writes to disk.
+  // Uses endWrite as chunk size for fs writestream.
   const stream = fs.createWriteStream(pathToFile);
   let count = start;
   let dataToWrite = [];

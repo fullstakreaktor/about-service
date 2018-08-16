@@ -20,6 +20,16 @@ columnspec:
   - name: list_id int
     size: uniform(1..10000000)
 
+insert:
+  partitions: uniform(1..5)
+  batchtype: LOGGED
+  select: uniform(1..10)/10
+
+queries:
+  singlepost:
+    cql: select * from listing_firstname where first_name = ? LIMIT 100
+    fields: samerow
+
 # ### To run a separate test, uncomment the lines below and
 # ### comment out the lines above through table.
 
@@ -70,13 +80,3 @@ columnspec:
 #     size: uniform(10..20)
 #   - name: country
 #     size: fixed(30)
-
-insert:
-  partitions: uniform(1..5)
-  batchtype: LOGGED
-  select: uniform(1..10)/10
-
-queries:
-  singlepost:
-    cql: select * from listing_firstname where first_name = ? LIMIT 100
-    fields: samerow
