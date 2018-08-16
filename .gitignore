@@ -1,2 +1,5 @@
 node_modules
 client/config/googleMap.js
+GoogleMap.js
+*.txt
+.DS_Store
