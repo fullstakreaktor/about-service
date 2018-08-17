@@ -17,7 +17,7 @@ const createCSV = (fileName) => {
 
   for(let i = 0 ; i < 10000000; i++){
     var data = {
-                rating: Math.ceil(Math.random()*5),
+                rating: Math.ceil(Math.random()*1000),
                 host_id: Math.ceil(Math.random()*10000000),
                 listings_id: Math.ceil(Math.random()*10000000)
                 }

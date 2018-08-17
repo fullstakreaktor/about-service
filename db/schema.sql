@@ -33,7 +33,7 @@ CREATE TABLE listings (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE reviews (
+CREATE TABLE ratings (
   id INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
   list_id INT NOT NULL,

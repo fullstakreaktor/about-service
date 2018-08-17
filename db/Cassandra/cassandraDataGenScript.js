@@ -2,6 +2,7 @@ const fs = require('fs');
 var faker = require('faker');
 const csvWriter = require('csv-write-stream');
 var writer = csvWriter();
+ const activities = require('./activitiesGenerator.js')
  const mockData = require('../mockdata.js');
  const prefixes = ['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Madam', 'Master', 'Prince', 'Princess', 'Duke', 'Baron'];
  const firstNames = ['Demarcus', 'Rose', 'Curtis', 'Dean', 'Neil', 'Hortense', 'Ines', 'Kariane', 'Darrick', 'Yesenia', 'Constance', 'Cicero', 'Angelina', 'Roosevelt', 'Julia', 'Mark', 'Zakary', 'Ernestina', 'Darlene', 'Cleve', 'John', 'Roberta', 'Edythe', 'Jonatan', 'Joan', 'Summer', 'Berniece', 'Marcelina', 'Dejon', 'Sydnie', 'Malvina', 'Royal', 'Eula', 'Jannie', 'Felicity', 'Randall', 'Jovanny', 'Breana', 'Berenice', 'Earnest', 'Chris', 'Yvette', 'Miller', 'Else', 'Cali', 'Monty', 'Donald', 'Camille', 'Jadon', 'Sharon', 'Jordane', 'Timothy', 'Ron', 'Colby', 'Emery', 'Rusty', 'Brendon', 'Kacey', 'Drake', 'Joelle', 'Alfred', 'Raleigh', 'Arlo', 'Camille', 'Giles', 'Kariane', 'Adelle', 'Lucinda', 'Rickie', 'Darien', 'Rod', 'Kassandra', 'Rosanna', 'Melyssa', 'Amari', 'Arne', 'Efrain', 'Nicole', 'Gordon', 'Isobel', 'Karli', 'Josue', 'Tanya', 'Amber', 'Earnestine', 'Catharine', 'Anabelle', 'Kristy', 'Elise', 'Lance', 'Marvin', 'Christophe', 'Paul', 'Phoebe', 'Carlotta', 'Robbie', 'Dave', 'Zula', 'Yadira', 'Holly'];
@@ -10,6 +11,12 @@ var writer = csvWriter();
  const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max))
 };
+
+const getLatitude = () => {
+  var num = Math.random(1) * 99;
+  return parseFloat(num.toFixed(2));
+};
+
  const randomBool = () => {
   var num = Math.floor(Math.random() * Math.floor(2))
   if(num === 0){
@@ -20,7 +27,7 @@ var writer = csvWriter();
 const createCSV = (fileName) => {
   var count = 7500000;
   fileName = fileName || 'data.csv';
-  writer.pipe(fs.createWriteStream('../Cassandra/CSV/host/' + fileName));
+  writer.pipe(fs.createWriteStream(fileName));
    for (let i = 0; i < prefixes.length; i += 1) {
     for (let j = 0; j < firstNames.length; j += 1) {
       for (let k = 0; k < lastNames.length; k += 1) {
@@ -41,7 +48,12 @@ const createCSV = (fileName) => {
                          response_rate: Math.floor(Math.random()*99) ,
                          response_time: Math.floor(Math.random()*5),
                          languages: 'english' ,
-                         email: mockData.emails[getRandomInt(mockData.emails.length)]
+                         email: mockData.emails[getRandomInt(mockData.emails.length)],
+                         features: activities[Math.floor(Math.random()*999)],
+                         things_to_do: activities[Math.floor(Math.random()*999)] ,
+                         lat_location: getLatitude(),
+                         lon_location: getLatitude() * 2 ,
+                         rating: Math.floor(Math.random()*5)
                         });
 
          
@@ -52,4 +64,4 @@ const createCSV = (fileName) => {
   writer.end();
   console.log('Done');
 };
- createCSV('fourFourthOfHostTable.csv'); 
+ createCSV('fourthEntireDataSet.csv'); 

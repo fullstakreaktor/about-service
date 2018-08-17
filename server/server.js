@@ -1,9 +1,12 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-// need to create a file to select data
 const db = require('../db/queries.js');
-
+var dbPostG = require('../db/Postgres/connection.js');
+const redis = require('redis');
+var client = redis.createClient()
+var compression = require('compression')
 const app = express();
 
 // to parse our data and use req.body
@@ -46,20 +49,64 @@ app.get('/api/about/neighborhood/:listingId', (req, res) => {
   });
 });
 
+const cacheHostByLoc = (req, res) => {
+  //Check the cache data from the server redis
+  client.get('hostByLocKey', (err, result) => {
+    if (result) {
+      res.send(result);
+    } else {
+      dbPostG.getListingByLoc(req.params.state, req.params.city).then(function(data){
+        client.setex('hostByLocKey', 3600, JSON.stringify(data));
+        res.send(data);
+      }).catch(function(error){
+        console.log('Error:', error)
+      })
+    }
+  });
+}
+
+// postgres query 
+const cacheListById = (req, res) => {
+  client.get('listById', (err, result) => {
+    if(result){
+      res.send(result);
+    } else {
+      dbPostG.getHostInfo(+req.params.id).then( function(data){
+        client.setex('listById', 3600, JSON.stringify(data));
+        res.send(data);
+        //dbPostG.pgp.end();
+      }).catch(function(error){
+        console.log('Error:', error)
+      });
+    }
+  })
+
+}
+// app.get('/api/getHostInfo/:id/', (req, res) => {
+//   dbPostG.getHostInfo(+req.params.id).then( function(data){
+//     //console.log(data);
+//     res.send(data);
+//     //dbPostG.pgp.end();
+//   }).catch(function(error){
+//     console.log('Error:', error)
+//   });
+
+// })
+
+// app.get('/api/getListingByLoc/:state/:city', (req, res) => {
+//   dbPostG.getListingByLoc(req.params.state, req.params.city).then(function(data){
+//     res.send(data);
+//   }).catch(function(error){
+//     console.log('Error:', error)
+//   })
+// })
+
+app.get('/api/getListingByLoc/:state/:city', cacheHostByLoc);
+app.get('/api/about/neighborhood/:listingId', cacheListById);
+
+// app.use(compression())
 app.listen(3001, () => {
   console.log('Server started on 3001');
 });
 
 
-// const express = require('express');
-// const morgan = require('morgan');
-// const path = require('path');
-// const app = express();
-// const port = process.env.PORT || 3002;
-//
-// app.use(morgan('dev'));
-// app.use(express.static(path.join(__dirname, '../public')));
-//
-// app.listen(port, () => {
-//   console.log(`server running at: http://localhost:${port}`);
-// });
