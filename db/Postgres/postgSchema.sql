@@ -3,6 +3,8 @@ CREATE DATABASE aboutInfo;
 
 DROP TABLE IF EXISTS hosts CASCADE;
 DROP TABLE IF EXISTS listing CASCADE;
+
+
 DROP TABLE IF EXISTS ratings CASCADE;
 
 CREATE TABLE hosts (
@@ -36,11 +38,13 @@ CREATE TABLE listing (
 );
 
 
-CREATE TABLE ratings (
+
+DROP TABLE IF EXISTS reviews CASCADE;
+CREATE TABLE reviews (
   id SERIAL PRIMARY KEY,
-  rating integer NOT NULL,
-  host_id integer REFERENCES hosts(id),
-  listing_id integer REFERENCES listing(id)
+  review_num integer NOT NULL,
+  host_id integer /*REFERENCES hosts(id)*/,
+  listing_id integer /*REFERENCES listing(id)*/
 
 );
 
@@ -68,4 +72,4 @@ from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/host/fo
 copy listing (features, things_to_do, lat_location, lon_location) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/listings/first_listingsTableData.csv' DELIMITERS ',' CSV;
 copy listing (features, things_to_do, lat_location, lon_location) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/listings/second_listingsTableData.csv' DELIMITERS ',' CSV;
 
-copy ratings(rating, host_id, listing_id) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/ratings/ratingsTable.csv' DELIMITERS ',' CSV;
+copy reviews(review_num, host_id, listing_id) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/ratings/ratingsTable.csv' DELIMITERS ',' CSV;

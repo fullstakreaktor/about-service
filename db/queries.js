@@ -37,15 +37,3 @@ module.exports = {
   selectHostInfo, reviewsForHost, neighborhoodInfo,
 };
 
-// selectHostInfo();
-// reviewsForHost((err, result) => {
-//   console.log(result.length);
-// });
-
-// neighborhoodInfo(56, (err, result)=> {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(result);
-//   }
-// });
