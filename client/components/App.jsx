@@ -4,7 +4,7 @@ import HostInfo from './HostInfo.jsx';
 import HostDescription from './HostDescription.jsx';
 import ContactAirbnb from './AlwaysContactAbnb.jsx';
 import Neighborhood from './Neighborhood.jsx';
-import GoogleMap from './Map.jsx';
+// import GoogleMap from './Map.jsx';
 import CSSModules from 'react-css-modules';
 import styles from './css/styles.css';
 
@@ -30,8 +30,8 @@ class App extends React.Component {
   componentDidMount() {
     this.getHostInfo();
     this.getReviewInfo();
-    this.reviewOrReviews();
     this.getNeighborhoodInfo();
+    this.reviewOrReviews();
   }
 
   getHostInfo() {
@@ -61,7 +61,7 @@ class App extends React.Component {
   }
 
   reviewOrReviews() {
-    if (this.state.numsOfReviews <= 1) {
+    if (this.state.numsOfReviews === 1) {
       this.setState({ reviewWording: 'review' });
     }
   }
@@ -76,13 +76,14 @@ class App extends React.Component {
     if (this.state.host.response_time <= 59) {
       return <span className="boldingWords">Within an hour</span>
     }
+    return <span className="boldingWords">Within a day</span>
   }
 
   render() {
     return (
       <div>
         <span styleName='title'>Hosted By {this.state.host.first_name}</span>
-        <span><img styleName='hostImg' src={`https://s3-us-west-1.amazonaws.com/dog-photos-bentley/${this.state.host.id}.jpeg`}/></span>
+        <span><img styleName='hostImg' src={`https://pm1.narvii.com/6353/633f430ab321b7fdd7c2d7162426b8a02bc9cf68_hq.jpg`}/></span>
         <HostInfo host={this.state.host} joinMonth={this.state.joinMonth} joinYear={this.state.joinYear} reviews={this.state.numsOfReviews} reviewWording={this.state.reviewWording} verifiedOrNot={this.verifiedOrNot}/>
 
         <HostDescription host={this.state.host} responseTimeConvertor={this.responseTimeConvertor} />

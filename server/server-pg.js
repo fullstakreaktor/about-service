@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 // need to create a file to select data
-const db = require('../db/queries.js');
+const db = require('../db/queries-pg.js');
 
 const app = express();
 
