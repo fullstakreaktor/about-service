@@ -49,27 +49,20 @@ CREATE TABLE reviews (
 );
 
 
-copy hosts (list_name, first_name, last_name, city, 
-	state, country, joined_in_date, references_count, verified, 
-	description, response_rate, response_time, languages, email) 
-from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/host/firstFourthOfHostTable.csv' DELIMITERS ',' CSV;
+\copy hosts (list_name, first_name, last_name, city, state, country, joined_in_date, references_count, verified, description, response_rate, response_time, languages, email) from './csvFiles/host/firstFourthOfHostTable.csv' DELIMITERS ',' CSV;
 
-copy hosts (list_name, first_name, last_name, city, 
-	state, country, joined_in_date, references_count, verified, 
-	description, response_rate, response_time, languages, email) 
-from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/host/secondFourthOfHostTable.csv' DELIMITERS ',' CSV;
+\copy hosts (list_name, first_name, last_name, city, state, country, joined_in_date, references_count, verified, description, response_rate, response_time, languages, email) from './csvFiles/host/secondFourthOfHostTable.csv' DELIMITERS ',' CSV;
 
-copy hosts (list_name, first_name, last_name, city, 
-	state, country, joined_in_date, references_count, verified, 
-	description, response_rate, response_time, languages, email) 
-from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/host/thirdFourthOfHostTable.csv' DELIMITERS ',' CSV;
+\copy hosts (list_name, first_name, last_name, city, state, country, joined_in_date, references_count, verified, description, response_rate, response_time, languages, email) from './csvFiles/host/thirdFourthOfHostTable.csv' DELIMITERS ',' CSV;
 
-copy hosts (list_name, first_name, last_name, city, 
-	state, country, joined_in_date, references_count, verified, 
-	description, response_rate, response_time, languages, email) 
-from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/host/fourFourthOfHostTable.csv' DELIMITERS ',' CSV;
+\copy hosts (list_name, first_name, last_name, city, state, country, joined_in_date, references_count, verified, description, response_rate, response_time, languages, email) from './csvFiles/host/fourFourthOfHostTable.csv' DELIMITERS ',' CSV;
 
-copy listing (features, things_to_do, lat_location, lon_location) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/listings/first_listingsTableData.csv' DELIMITERS ',' CSV;
-copy listing (features, things_to_do, lat_location, lon_location) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/listings/second_listingsTableData.csv' DELIMITERS ',' CSV;
+\copy listing (features, things_to_do, lat_location, lon_location) from './csvFiles/listings/first_listingsTableData.csv' DELIMITERS ',' CSV;
+\copy listing (features, things_to_do, lat_location, lon_location) from './csvFiles/listings/second_listingsTableData.csv' DELIMITERS ',' CSV;
 
-copy reviews(review_num, host_id, listing_id) from '/Users/gauravgulati/desktop/SDC/about-service/db/Postgres/csvFiles/ratings/ratingsTable.csv' DELIMITERS ',' CSV;
+\copy reviews(review_num, host_id, listing_id) from './csvFiles/ratings/ratingsTable.csv' DELIMITERS ',' CSV;
+
+CREATE index on hosts (city, state);
+CREATE index on hosts (id, first_name, last_name, email);
+CREATE index on listing  (id, features, things_to_do, lat_location, lon_location);
+CREATE index on reviews (id, review_num);

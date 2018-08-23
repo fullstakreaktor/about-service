@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
   user: 'root',
   password: 'p',
   database: 'rental_hosts'
-  // port: '3306',
+  // port: '3306'
 });
 
 setTimeout(function() {

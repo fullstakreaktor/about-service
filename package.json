@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack -d --watch",
-    "start": "nodemon ./server/server.js"
+    "start": "NODE_ENV=production nodemon ./server/server.js"
   },
   "keywords": [],
   "author": "",

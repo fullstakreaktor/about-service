@@ -23,7 +23,7 @@ const reviewsForHost = (id, callback) => {
 };
 
 const neighborhoodInfo = (id, callback) => {
-  const theQuery = `select * from listings where id = ${id}`;
+  const theQuery = `select * from listing where id = ${id}`;
   connection.query(theQuery, (err, result)=> {
     if (err) {
       console.log(err);
