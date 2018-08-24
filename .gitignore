@@ -1,2 +1,7 @@
 node_modules
 client/config/googleMap.js
+*.csv
+
+Artillery/test.yml
+
+docker-compose.yml

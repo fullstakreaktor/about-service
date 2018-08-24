@@ -9,7 +9,7 @@ var pgp = require('pg-promise')({
 //     database: 'aboutInfo'
 // };
 
-const dbPG = pgp('postgres://gauravgulati@ec2-18-222-158-107.us-east-2.compute.amazonaws.com:5432/aboutInfo');hi
+const dbPG = pgp('postgres://gauravgulati@ec2-18-222-158-107.us-east-2.compute.amazonaws.com:5432/aboutInfo');
 
 const getHostInfo = (id) => {
 	var promise = dbPG.any(`select id, first_name, last_name, email from hosts where id = '${id}' LIMIT 1 `)
