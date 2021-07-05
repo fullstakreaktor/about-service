@@ -25,6 +25,7 @@ const emails = ['dlippitt0@chicagotribune.com', 'dcharlwood1@icio.us', 'lboichat
 
 const urls = ['www.photobooth.com/url1'];
 
+
 module.exports = {
   features, thingsToDo, locations, hostGuidebooks, firstNames, lastNames, cities, states, countries, joinInDates, descriptions, emails, urls,
 };

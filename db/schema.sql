@@ -5,6 +5,7 @@ use rental_hosts;
 
 CREATE TABLE hosts (
   id int NOT NULL AUTO_INCREMENT,
+  listing_name varchar(300) NOT NULL,
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
   city varchar(255)  NOT NULL,
@@ -32,7 +33,7 @@ CREATE TABLE listings (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE reviews (
+CREATE TABLE ratings (
   id INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
   list_id INT NOT NULL,
@@ -43,6 +44,7 @@ CREATE TABLE reviews (
 );
 
 
+ 
 
 -- test inserting to hosts
 -- INSERT INTO hosts (first_name, last_name, location, joined_in_date, verified, description, response_rate, response_time, languages, email) VALUES ('JOYCE', 'CHO', 'SAN FRANCISCO', '2012-05-20', 1, 'House privileges nice view?', 0.939431894, 1, "English", "helloworld@world.com");
